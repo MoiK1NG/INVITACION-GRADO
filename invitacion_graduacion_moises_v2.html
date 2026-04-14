@@ -1,0 +1,231 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  .invite-wrapper { display: flex; justify-content: center; align-items: center; padding: 20px 10px; }
+  .card {
+    width: 100%; max-width: 420px; background: #0a0a0a;
+    border-radius: 20px; overflow: hidden; position: relative;
+    border: 1px solid #c9a84c;
+    animation: pulse-gold 3s ease-in-out infinite;
+  }
+  @keyframes pulse-gold {
+    0%,100% { box-shadow: 0 0 60px rgba(201,168,76,0.15); }
+    50% { box-shadow: 0 0 80px rgba(201,168,76,0.3); }
+  }
+  .gold-arc-top {
+    position: absolute; top: 0; left: 0; right: 0; height: 180px;
+    overflow: hidden; pointer-events: none; z-index: 1;
+  }
+  .gold-arc-bot {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 140px;
+    overflow: hidden; pointer-events: none; z-index: 1;
+  }
+  .content { position: relative; z-index: 2; padding: 24px 28px 28px; text-align: center; }
+  .cap-icon { font-size: 52px; display: block; filter: drop-shadow(0 0 12px rgba(201,168,76,0.6)); margin-bottom: 2px; }
+  .subtitle-top { font-family: 'Montserrat',sans-serif; font-size: 10px; letter-spacing: 3px; color: #c9a84c; text-transform: uppercase; margin-bottom: 8px; }
+  .laurels { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 4px; }
+  .laurel-svg { width: 44px; opacity: 0.85; }
+  .main-title { font-family: 'Montserrat',sans-serif; font-size: 36px; font-weight: 800; color: #fff; letter-spacing: 4px; text-transform: uppercase; line-height: 1; text-shadow: 0 0 30px rgba(201,168,76,0.3); }
+  .ribbon { background: linear-gradient(135deg,#c9a84c,#f5d78e,#c9a84c); margin: 10px auto; padding: 7px 20px; border-radius: 3px; display: inline-block; position: relative; }
+  .ribbon::before,.ribbon::after { content:''; position:absolute; top:50%; transform:translateY(-50%); border:16px solid transparent; }
+  .ribbon::before { left:-16px; border-right-color:#b8913d; }
+  .ribbon::after { right:-16px; border-left-color:#b8913d; }
+  .ribbon-text { font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; color:#1a0e00; letter-spacing:2px; text-transform:uppercase; white-space:nowrap; }
+  .graduate-name { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:#f5d78e; margin:14px 0 6px; line-height:1.3; text-shadow:0 0 20px rgba(201,168,76,0.4); }
+  .graduate-sub { font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:2.5px; color:#888; text-transform:uppercase; margin-bottom:18px; }
+  .gold-divider { width:100%; height:1px; background:linear-gradient(90deg,transparent,#c9a84c,transparent); margin:16px 0; }
+  .date-row { display:flex; align-items:center; justify-content:center; gap:16px; margin:4px 0 16px; }
+  .date-label { font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:3px; color:#aaa; text-transform:uppercase; }
+  .date-circle { width:56px; height:56px; border-radius:50%; background:radial-gradient(circle at 35% 35%,#f5d78e,#c9a84c 50%,#8a6720); display:flex; align-items:center; justify-content:center; box-shadow:0 0 20px rgba(201,168,76,0.4); }
+  .date-number { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:800; color:#1a0e00; line-height:1; }
+  .info-row { display:flex; gap:10px; margin-bottom:14px; }
+  .info-box { flex:1; background:rgba(255,255,255,0.03); border:1px solid rgba(201,168,76,0.2); border-radius:10px; padding:12px 10px; text-align:center; }
+  .info-icon { font-size:18px; margin-bottom:4px; display:block; }
+  .info-box-label { font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:2px; color:#c9a84c; text-transform:uppercase; margin-bottom:3px; }
+  .info-box-value { font-family:'Montserrat',sans-serif; font-size:12px; font-weight:600; color:#fff; }
+  .venue-section { background:rgba(255,255,255,0.03); border:1px solid rgba(201,168,76,0.2); border-radius:10px; padding:14px 16px; margin-bottom:14px; }
+  .venue-label { font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:2.5px; color:#c9a84c; text-transform:uppercase; margin-bottom:5px; }
+  .venue-name { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:#fff; margin-bottom:3px; }
+  .venue-address { font-family:'Montserrat',sans-serif; font-size:11px; color:#888; line-height:1.5; }
+  .map-btn { display:inline-flex; align-items:center; gap:6px; margin-top:10px; padding:8px 18px; background:linear-gradient(135deg,#c9a84c,#f5d78e); color:#1a0e00; border:none; border-radius:20px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; text-decoration:none; transition:transform 0.2s,box-shadow 0.2s; }
+  .map-btn:hover { transform:scale(1.04); box-shadow:0 4px 20px rgba(201,168,76,0.5); }
+  .countdown-section { margin:10px 0 0; }
+  .countdown-label { font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:2px; color:#c9a84c; text-transform:uppercase; margin-bottom:8px; }
+  .countdown-row { display:flex; justify-content:center; gap:8px; }
+  .cd-box { background:rgba(201,168,76,0.08); border:1px solid rgba(201,168,76,0.3); border-radius:8px; padding:8px 10px; min-width:52px; text-align:center; }
+  .cd-number { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:800; color:#f5d78e; line-height:1; }
+  .cd-unit { font-family:'Montserrat',sans-serif; font-size:8px; letter-spacing:1.5px; color:#666; text-transform:uppercase; margin-top:2px; }
+  .confetti-btn { display:inline-flex; align-items:center; gap:8px; padding:12px 28px; background:transparent; color:#c9a84c; border:1px solid #c9a84c; border-radius:24px; font-family:'Montserrat',sans-serif; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.3s; margin-top:4px; }
+  .confetti-btn:hover { background:rgba(201,168,76,0.1); box-shadow:0 0 20px rgba(201,168,76,0.3); }
+  .stars-bg { position:absolute; top:0; left:0; right:0; bottom:0; pointer-events:none; z-index:0; }
+  .star { animation:shimmer ease-in-out infinite; }
+  @keyframes shimmer { 0%,100%{opacity:0.4} 50%{opacity:1} }
+  .confetti-particle { position:fixed; pointer-events:none; z-index:9999; border-radius:2px; animation:fall linear forwards; }
+  @keyframes fall { 0%{transform:translateY(-20px) rotate(0deg);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
+</style>
+
+<div class="invite-wrapper">
+  <div class="card">
+    <svg class="stars-bg" viewBox="0 0 420 860" xmlns="http://www.w3.org/2000/svg">
+      <g id="stars-group"></g>
+    </svg>
+
+    <svg class="gold-arc-top" viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M-20,0 Q210,-30 440,20 L440,0 L-20,0 Z" fill="#c9a84c" opacity="0.15"/>
+      <path d="M-20,10 Q210,60 440,10" stroke="#c9a84c" stroke-width="1.5" fill="none" opacity="0.6"/>
+      <path d="M-20,18 Q210,72 440,18" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.3"/>
+      <path d="M320,0 Q380,60 440,80 L440,0 Z" fill="#c9a84c" opacity="0.1"/>
+    </svg>
+
+    <div class="content">
+      <span class="cap-icon">🎓</span>
+      <p class="subtitle-top">Estás invitado a la ceremonia de</p>
+
+      <div class="laurels">
+        <svg class="laurel-svg" viewBox="0 0 50 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40,30 Q35,20 25,15 Q30,25 28,35" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          <path d="M40,30 Q32,22 22,22 Q28,30 26,40" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          <path d="M40,30 Q34,28 24,30 Q30,36 30,46" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          <ellipse cx="27" cy="14" rx="4" ry="6" fill="#c9a84c" opacity="0.7" transform="rotate(-20,27,14)"/>
+          <ellipse cx="23" cy="21" rx="4" ry="6" fill="#c9a84c" opacity="0.7" transform="rotate(-30,23,21)"/>
+          <ellipse cx="23" cy="29" rx="4" ry="6" fill="#c9a84c" opacity="0.7" transform="rotate(-40,23,29)"/>
+          <ellipse cx="27" cy="37" rx="4" ry="6" fill="#c9a84c" opacity="0.7" transform="rotate(-50,27,37)"/>
+        </svg>
+        <span class="main-title">Graduación</span>
+        <svg class="laurel-svg" viewBox="0 0 50 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform:scaleX(-1)">
+          <path d="M40,30 Q35,20 25,15 Q30,25 28,35" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          <path d="M40,30 Q32,22 22,22 Q28,30 26,40" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          <path d="M40,30 Q34,28 24,30 Q30,36 30,46" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          <ellipse cx="27" cy="14" rx="4" ry="6" fill="#c9a84c" opacity="0.7" transform="rotate(-20,27,14)"/>
+          <ellipse cx="23" cy="21" rx="4" ry="6" fill="#c9a84c" opacity="0.7" transform="rotate(-30,23,21)"/>
+          <ellipse cx="23" cy="29" rx="4" ry="6" fill="#c9a84c" opacity="0.7" transform="rotate(-40,23,29)"/>
+          <ellipse cx="27" cy="37" rx="4" ry="6" fill="#c9a84c" opacity="0.7" transform="rotate(-50,27,37)"/>
+        </svg>
+      </div>
+
+      <div style="margin:8px 0;">
+        <div class="ribbon">
+          <span class="ribbon-text">Ingeniero Industrial</span>
+        </div>
+      </div>
+
+      <p class="graduate-name">Moisés Camargo Pérez</p>
+      <p class="graduate-sub">Nos llena de orgullo celebrar contigo</p>
+
+      <div class="gold-divider"></div>
+
+      <div class="date-row">
+        <span class="date-label">Viernes</span>
+        <div class="date-circle">
+          <span class="date-number">24</span>
+        </div>
+        <span class="date-label">Abril</span>
+      </div>
+
+      <div class="info-row">
+        <div class="info-box">
+          <span class="info-icon">🕗</span>
+          <div class="info-box-label">Hora</div>
+          <div class="info-box-value">8:00 PM</div>
+        </div>
+        <div class="info-box">
+          <span class="info-icon">👔</span>
+          <div class="info-box-label">Dress Code</div>
+          <div class="info-box-value">Formal</div>
+        </div>
+        <div class="info-box">
+          <span class="info-icon">📅</span>
+          <div class="info-box-label">Año</div>
+          <div class="info-box-value">2026</div>
+        </div>
+      </div>
+
+      <div class="venue-section">
+        <div class="venue-label">📍 Lugar</div>
+        <div class="venue-name">Salón de Eventos La Mona</div>
+        <div class="venue-address">Cra. 3 #45-15, Ciudadela 20 de Julio<br>Barranquilla, Atlántico</div>
+        <a class="map-btn" href="https://maps.app.goo.gl/Km8Y9w258gdDFMvu5" target="_blank">🗺 Ver en Google Maps</a>
+      </div>
+
+      <div class="gold-divider"></div>
+
+      <div class="countdown-section">
+        <div class="countdown-label">⏳ Cuenta regresiva</div>
+        <div class="countdown-row">
+          <div class="cd-box"><div class="cd-number" id="cd-days">--</div><div class="cd-unit">días</div></div>
+          <div class="cd-box"><div class="cd-number" id="cd-hours">--</div><div class="cd-unit">horas</div></div>
+          <div class="cd-box"><div class="cd-number" id="cd-mins">--</div><div class="cd-unit">min</div></div>
+          <div class="cd-box"><div class="cd-number" id="cd-secs">--</div><div class="cd-unit">seg</div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;">
+        <button class="confetti-btn" onclick="launchConfetti()">🎉 ¡Celebrar!</button>
+      </div>
+    </div>
+
+    <svg class="gold-arc-bot" viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M-20,140 Q210,100 440,130 L440,140 Z" fill="#c9a84c" opacity="0.12"/>
+      <path d="M-20,130 Q210,90 440,120" stroke="#c9a84c" stroke-width="1.5" fill="none" opacity="0.5"/>
+      <path d="M-20,122 Q210,82 440,112" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.25"/>
+    </svg>
+  </div>
+</div>
+
+<script>
+(function() {
+  const starsG = document.getElementById('stars-group');
+  for (let i = 0; i < 40; i++) {
+    const star = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    star.setAttribute('cx', Math.random() * 420);
+    star.setAttribute('cy', Math.random() * 860);
+    star.setAttribute('r', Math.random() * 1.5 + 0.3);
+    star.setAttribute('fill', '#c9a84c');
+    star.setAttribute('opacity', Math.random() * 0.6 + 0.2);
+    star.setAttribute('class', 'star');
+    star.style.animationDuration = (Math.random() * 3 + 1.5) + 's';
+    star.style.animationDelay = (Math.random() * 2) + 's';
+    starsG.appendChild(star);
+  }
+
+  function updateCountdown() {
+    const now = new Date();
+    const event = new Date(2026, 3, 24, 20, 0, 0); // April 24 2026, 8 PM local
+    const diff = event - now;
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
+      return;
+    }
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  window.launchConfetti = function() {
+    const colors = ['#c9a84c','#f5d78e','#ffffff','#e8d5a3','#ffd700','#fff8dc'];
+    for (let i = 0; i < 80; i++) {
+      setTimeout(() => {
+        const p = document.createElement('div');
+        p.className = 'confetti-particle';
+        p.style.left = (Math.random() * 100) + 'vw';
+        p.style.top = '-20px';
+        p.style.width = (Math.random() * 8 + 4) + 'px';
+        p.style.height = (Math.random() * 8 + 4) + 'px';
+        p.style.background = colors[Math.floor(Math.random() * colors.length)];
+        p.style.animationDuration = (Math.random() * 2.5 + 1.5) + 's';
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 4000);
+      }, i * 30);
+    }
+  };
+})();
+</script>
